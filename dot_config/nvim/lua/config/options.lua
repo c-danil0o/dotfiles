@@ -1,6 +1,8 @@
 -- Options are automatically loaded before lazy.nvim startup
 -- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.luaop
 -- Add any additional options here
+
+vim.opt.shiftwidth = 4 -- Size of an indent
 if vim.g.neovide then
   vim.g.neovide_text_gamma = 0.8
   vim.g.neovide_text_contrast = 0.1

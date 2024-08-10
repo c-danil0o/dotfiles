@@ -19,6 +19,15 @@ end
 
 alias pamcan=pacman
 
+alias ls="exa --icons" # ls
+alias ll='exa -lbF --git' # list, size, type, git
+alias llm='exa -lbGd --git --sort=modified' # long list, modified date sort
+alias la='exa -lbhHigUmuSa --time-style=long-iso --git --color-scale' # all list
+alias lx='exa -lbhHigUmuSa@ --time-style=long-iso --git --color-scale' # all + extended list
+alias lS='exa -1' # one column, just names
+alias lt='exa --tree --level=2' # tree
+
+
 # function fish_prompt
 #   set_color cyan; echo (pwd)
 #   set_color green; echo '> '
