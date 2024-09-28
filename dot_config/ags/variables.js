@@ -1,9 +1,8 @@
-
 const { Gdk, Gtk } = imports.gi;
 import App from 'resource:///com/github/Aylur/ags/app.js'
-import Variable from 'resource:///com/github/Aylur/ags/variable.js';
-import Mpris from 'resource:///com/github/Aylur/ags/service/mpris.js';
 import Hyprland from 'resource:///com/github/Aylur/ags/service/hyprland.js';
+import Mpris from 'resource:///com/github/Aylur/ags/service/mpris.js';
+import Variable from 'resource:///com/github/Aylur/ags/variable.js';
 import * as Utils from 'resource:///com/github/Aylur/ags/utils.js';
 const { exec, execAsync } = Utils;
 
@@ -16,11 +15,23 @@ globalThis['openMusicControls'] = showMusicControls;
 globalThis['openColorScheme'] = showColorScheme;
 globalThis['mpris'] = Mpris;
 
-// Mode switching
-const numberOfMonitors = Gdk.Display.get_default()?.get_n_monitors() || 1;
-const initialMonitorShellModes = Array.from({ length: numberOfMonitors }, () => "normal");
-export const currentShellMode = Variable(initialMonitorShellModes, {}) // normal, focus
+// load monitor shell modes from userOptions
+const initialMonitorShellModes = () => {
+    const numberOfMonitors = Gdk.Display.get_default()?.get_n_monitors() || 1;
+    const monitorBarConfigs = [];
+    for (let i = 0; i < numberOfMonitors; i++) {
+        if (userOptions.bar.modes[i]) {
+            monitorBarConfigs.push(userOptions.bar.modes[i])
+        } else {
+            monitorBarConfigs.push('normal')
+        }
+    }
+    return monitorBarConfigs;
 
+}
+export const currentShellMode = Variable(initialMonitorShellModes(), {}) // normal, focus
+
+// Mode switching
 const updateMonitorShellMode = (monitorShellModes, monitor, mode) => {
     const newValue = [...monitorShellModes.value];
     newValue[monitor] = mode;
@@ -31,13 +42,13 @@ globalThis['cycleMode'] = () => {
     const monitor = Hyprland.active.monitor.id || 0;
 
     if (currentShellMode.value[monitor] === 'normal') {
-        updateMonitorShellMode(currentShellMode, monitor, "focus")
+        updateMonitorShellMode(currentShellMode, monitor, 'focus')
     }
     else if (currentShellMode.value[monitor] === 'focus') {
-        updateMonitorShellMode(currentShellMode, monitor, "nothing")
+        updateMonitorShellMode(currentShellMode, monitor, 'nothing')
     }
     else {
-        updateMonitorShellMode(currentShellMode, monitor, "normal")
+        updateMonitorShellMode(currentShellMode, monitor, 'normal')
     }
 }
 

@@ -49,6 +49,12 @@ export const languages = [
         name: 'Chinese',
         flag: '🇨🇳',
     },
+
+    {
+        layout: 'rs',
+        name: 'Serbian',
+        flag: '🇨🇳',
+    },
     {
         layout: 'vn',
         name: 'Vietnamese',

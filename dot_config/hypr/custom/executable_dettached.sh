@@ -1,6 +1,5 @@
 #!/bin/bash
 hyprctl reload
-killall ags ydotool
+killall ags
 ags &
 hyprctl dispatch split:grabroguewindows
-

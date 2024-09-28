@@ -27,6 +27,8 @@ alias lx='exa -lbhHigUmuSa@ --time-style=long-iso --git --color-scale' # all + e
 alias lS='exa -1' # one column, just names
 alias lt='exa --tree --level=2' # tree
 
+alias pff='poweroff'
+
 
 # function fish_prompt
 #   set_color cyan; echo (pwd)
