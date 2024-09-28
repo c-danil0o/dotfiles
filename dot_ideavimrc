@@ -1,0 +1,229 @@
+set scrolloff=5
+set history=1000
+set relativenumber
+
+
+" status bar
+set showmode
+set showcmd
+
+" leader
+map <space> <nop>
+let mapleader="\<space>"
+
+" find and replace
+set hlsearch
+set incsearch
+set ignorecase
+set smartcase
+set gdefault
+nmap <leader>nh :noh<CR>
+
+" clipboard
+set clipboard^=unnamedplus
+
+" ideavim settings
+set ideajoin
+set ideamarks
+set idearefactormode=normal
+set ideastatusicon=gray
+
+" better HJKL
+map H ^
+map L $
+map J }
+map K {
+map <A-j> 4j
+map <A-k> 4k
+
+" location
+nmap <C-i> <Action>(Back)
+nmap <C-o> <Action>(Forward)
+
+" buffer (buffer < window < tab)
+nmap <leader>xx <Action>(CloseContent)
+nmap <leader>xa <Action>(CloseAllEditors)
+nmap <leader>xo <Action>(CloseAllEditorsButActive)
+nmap <leader>xp <Action>(CloseAllUnpinnedEditors)
+
+" window
+nmap <C-Tab> <Action>(PreviousTab)
+nmap <Tab> <Action>(NextTab)
+nmap <leader>p <Action>(PinActiveEditorTab)
+
+nmap <leader>1 <Action>(GoToTab1)
+nmap <leader>2 <Action>(GoToTab2)
+nmap <leader>3 <Action>(GoToTab3)
+nmap <leader>4 <Action>(GoToTab4)
+nmap <leader>5 <Action>(GoToTab5)
+nmap <leader>6 <Action>(GoToTab6)
+nmap <leader>7 <Action>(GoToTab7)
+nmap <leader>8 <Action>(GoToTab8)
+nmap <leader>9 <Action>(GoToTab9)
+
+" tab
+map <leader>sH <Action>(SplitHorizontally)
+map <leader>sV <Action>(SplitVertically)
+
+nmap <C-k> <C-w>k
+nmap <C-j> <C-w>j
+nmap <C-h> <C-w>h
+nmap <C-l> <C-w>l
+
+
+" remapping for separate cut and delete and improved paste
+nnoremap d "_d
+xnoremap d "_d
+
+nnoremap dd "_dd
+
+nnoremap D "_D
+xnoremap D "_D
+
+nnoremap x "_x
+xnoremap x "_x
+
+nnoremap m d
+nnoremap mm dd
+xnoremap m d
+
+nnoremap c "_c
+xnoremap c "_c
+
+nnoremap cc "_S
+vnoremap p "_dP
+
+nnoremap , viw"_dP
+
+map s <Action>(AceAction)
+
+" file
+nmap <leader>of <Action>(OpenFile)
+nmap <leader>yp <Action>(CopyAbsolutePath)
+nmap <leader><leader> <Action>(RecentFiles)
+nmap <leader>rl <Action>(RecentLocations)
+nmap <leader>rp <Action>(ManageRecentProjects)
+nmap <leader>sh <Action>(LocalHistory.ShowHistory)
+nmap <leader>sf <Action>(ShowFilePath)
+nmap <leader>si <Action>(SelectIn)
+nmap <leader>fp <Action>(FindInPath)
+nmap <leader>rp <Action>(ReplaceInPath)
+nmap <leader>sw <Action>($SearchWeb)
+
+" tag
+nmap <leader>fu <Action>(FindUsages)
+nmap <leader>fs <Action>(FileStructurePopup)
+nmap <leader>su <Action>(ShowUsages)
+nmap <leader>hl <Action>(HighlightUsagesInFile)
+nmap <leader>qp <Action>(QuickPreview)
+nmap <leader>qd <Action>(QuickDefinition)
+nmap <leader>qD <Action>(QuickTypeDefinition)
+
+" code
+map <leader>/ <Action>(CommentByLineComment)
+map <leader>? <Action>(CommentByBlockComment)
+nmap <leader>fc <Action>(ReformatCode)
+nmap <leader>gc <Action>(Generate)
+
+
+
+" refactor
+nmap <leader>rn <Action>(RenameElement)
+nmap <leader>re <Action>(Refactorings.QuickListPopupAction)
+nmap <leader>uw <Action>(Unwrap)
+nmap <leader>sw <Action>(SurroundWith)
+nmap <leader>sd <Action>(SafeDelete)
+nmap <leader>oi <Action>(OptimizeImports)
+
+
+
+" zen
+nmap <leader>z <Action>(ToggleZenMode)
+
+" []
+nmap [b <Action>(PreviousTab)
+nmap ]b <Action>(NextTab)
+nmap [g <Action>(GotoPreviousError)
+nmap ]g <Action>(GotoNextError)
+nmap [u <Action>(GotoPrevElementUnderCaretUsage)
+nmap ]u <Action>(GotoNextElementUnderCaretUsage)
+nmap [o <Action>(PreviousOccurence)
+nmap ]o <Action>(NextOccurence)
+nmap [m <Action>(MethodUp)
+nmap ]m <Action>(MethodDown)
+nmap [c <Action>(JumpToLastChange)
+nmap ]c <Action>(JumpToNextChange)
+
+" goto
+nmap <leader>a <Action>(GotoAction)
+nmap ga <Action>(GotoAction)
+nmap gc <Action>(GotoClass)
+nmap gf <Action>(GotoFile)
+nmap gs <Action>(GotoSymbol)
+nmap gt <Action>(GoToTest)
+nmap gT <Action>(TextSearchAction)
+nmap go <Action>(GotoSuperMethod)
+nmap gd <Action>(GotoDeclaration)
+nmap gD <Action>(GotoTypeDeclaration)
+nmap gi <Action>(GotoImplementation)
+nmap gI <Action>(QuickImplementations)
+nmap gn <Action>(ShowNavBar)
+
+" terminal
+nmap <leader>tt <Action>(ActivateTerminalToolWindow)
+nmap <leader>tc <Action>(Terminal.OpenInTerminal)
+
+
+
+" idea join
+nmap \\jl <Action>(EditorJoinLines)
+
+
+" text-object (bundle plugin)
+set vim-paragraph-motion
+set textobj-indent
+set textobj-entire
+set argtextobj
+
+" jump-motion (required idea plugin: IdeaVim-EasyMotion, AceJump)
+set sneak
+
+" highlight yank (bundle plugin)
+set highlightedyank
+let g:highlightedyank_highlight_duration = "1000"
+let g:highlightedyank_highlight_color = "rgba(57, 197, 187, 155)"
+
+
+" nerdtree (bundle plugin)
+set NERDTree
+map <leader>e :NERDTreeToggle<CR>
+
+
+" continuous shift
+xnoremap < <gv
+xnoremap > >gv
+
+set multiple-cursors
+" multiple cursors
+" Remap multiple-cursors shortcuts to match terryma/vim-multiple-cursors
+nmap <C-n> <Plug>NextWholeOccurrence
+xmap <C-n> <Plug>NextWholeOccurrence
+nmap g<C-n> <Plug>NextOccurrence
+xmap g<C-n> <Plug>NextOccurrence
+xmap <C-x> <Plug>SkipOccurrence
+xmap <C-p> <Plug>RemoveOccurrence
+
+set notimeout
+
+sethandler <C-a> a:ide
+sethandler <C-s> a:ide
+sethandler <C-x> a:ide
+sethandler <C-d> a:ide
+sethandler <C-v> a:ide
+sethandler <C-c> a:ide
+sethandler <C-h> a:vim
+sethandler <C-k> a:vim
+sethandler <C-l> a:vim
+sethandler <C-j> a:vim
+sethandler <C-i> a:vim
+sethandler <C-o> a:vim
