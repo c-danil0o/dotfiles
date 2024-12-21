@@ -1,0 +1,38 @@
+{
+    "dark": {
+        "term0"   : "#171b24",
+        "term1"   : "#E34F4F",
+        "term2"   : "#69bfce",
+        "term3"   : "#e37e4f",
+        "term4"   : "#5679E3",
+        "term5"   : "#956dca",
+        "term6"   : "#5599E2",
+        "term7"   : "#f4f3ee",
+        "term8"   : "#3A435A",
+        "term9"   : "#DE2B2B",
+        "term10"  : "#56B7C8",
+        "term11"  : "#DE642B",
+        "term12"  : "#3E66E0",
+        "term13"  : "#885AC4",
+        "term14"  : "#3F8CDE",
+        "term15"  : "#DDDBCF"
+    },
+    "light": {
+        "term0"   : "#FDF9F3",
+        "term1"   : "#FF6188",
+        "term2"   : "#A9DC76",
+        "term3"   : "#FC9867",
+        "term4"   : "#FFD866",
+        "term5"   : "#F47FD4",
+        "term6"   : "#78DCE8",
+        "term7"   : "#333034",
+        "term8"   : "#121212",
+        "term9"   : "#FF6188",
+        "term10"  : "#A9DC76",
+        "term11"  : "#FC9867",
+        "term12"  : "#FFD866",
+        "term13"  : "#F47FD4",
+        "term14"  : "#78DCE8",
+        "term15"  : "#333034"
+    }
+}
