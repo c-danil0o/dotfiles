@@ -42,5 +42,7 @@ alias pff='poweroff'
 #   set_color cyan; echo (pwd)
 #   set_color green; echo '> '
 # end
-set -gx EDITOR nvim
+set -Ux EDITOR nvim
+set -Ux VISUAL nvim
 zoxide init fish | source
+set PATH $PATH ~/.cargo/bin
