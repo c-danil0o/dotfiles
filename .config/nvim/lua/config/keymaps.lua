@@ -3,8 +3,8 @@
 -- Add any additional keymaps here
 local map = vim.keymap.set
 
-map({ "n", "v", "c", "x" }, "H", "^", { desc = "Go to the beggining of the line" })
-map({ "n", "v", "c", "x" }, "L", "$", { desc = "Go to the end of the line" })
+map({ "n", "v" }, "H", "^", { desc = "Go to the beggining of the line" })
+map({ "n", "v" }, "L", "$", { desc = "Go to the end of the line" })
 -- redap d to delete without cut
 map({ "n", "v" }, "d", '"_d')
 map("n", "dd", '"_dd')
