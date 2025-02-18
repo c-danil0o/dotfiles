@@ -10,21 +10,26 @@ import { enableClickthrough } from "../.widgetutils/clickthrough.js";
 import { RoundedCorner } from "../.commonwidgets/cairo_roundedcorner.js";
 import { currentShellMode } from '../../variables.js';
 
-const NormalOptionalWorkspaces = async () => {
+const NormalOptionalWorkspaces = async (monitorId) => {
   try {
-    return (await import('./normal/workspaces_hyprland.js')).default();
-  } catch {
+    console.log(`Loading Hyprland workspaces for monitor ${monitorId}`);
+    const module = await import('./normal/workspaces_hyprland.js');
+    return module.default(monitorId);
+  } catch (error) {
+    console.error(`Failed to load Hyprland workspaces: ${error}`);
     try {
-      return (await import('./normal/workspaces_sway.js')).default();
-    } catch {
+      console.log('Falling back to Sway workspaces');
+      const module = await import('./normal/workspaces_sway.js');
+      return module.default();
+    } catch (error) {
+      console.error(`Failed to load Sway workspaces: ${error}`);
       return null;
     }
   }
 };
-
-const FocusOptionalWorkspaces = async () => {
+const FocusOptionalWorkspaces = async (monitorId) => {
   try {
-    return (await import('./focus/workspaces_hyprland.js')).default();
+    return (await import('./focus/workspaces_hyprland.js')).default(monitorId);
   } catch {
     try {
       return (await import('./focus/workspaces_sway.js')).default();
@@ -52,7 +57,7 @@ export const Bar = async (monitor = 0) => {
       children: [
         Widget.Box({
           homogeneous: true,
-          children: [await NormalOptionalWorkspaces()],
+          children: [await NormalOptionalWorkspaces(monitor)],
         }),
         SideModule([System()]),
         SideModule([Stats()]),
@@ -69,7 +74,7 @@ export const Bar = async (monitor = 0) => {
         SideModule([]),
         Widget.Box({
           homogeneous: true,
-          children: [await FocusOptionalWorkspaces()],
+          children: [await FocusOptionalWorkspaces(monitor)],
         }),
         SideModule([]),
       ]

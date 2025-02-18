@@ -38,6 +38,12 @@ const userConfigOptions = {
       },
     ],
   },
+
+  'icons': {
+    substitutions: {
+      'zen': "zen-browser",
+    },
+  },
   // Longer stuff
 }
 
