@@ -161,7 +161,7 @@ const WorkspaceContents = (count = 10, monitorId) => {
           else
             cr.setSourceRGBA(inactivecolors.red, inactivecolors.green, inactivecolors.blue, inactivecolors.alpha);
 
-          layout.set_text(`${i + offset}`, -1);
+          layout.set_text(`${i}`, -1);
           const [layoutWidth, layoutHeight] = layout.get_pixel_size();
           const x = -workspaceRadius + (workspaceDiameter * i) - (layoutWidth / 2);
           const y = (height - layoutHeight) / 2;

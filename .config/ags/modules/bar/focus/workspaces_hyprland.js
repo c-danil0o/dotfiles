@@ -24,6 +24,7 @@ const WorkspaceContents = (count = 10, monitorId) => {
     attribute: {
       initialized: false,
       workspaceMask: 0,
+      workspaceGroup: 0,
       lastImmediateActiveWs: 0,
       immediateActiveWs: 0,
       updateMask: (self) => {
@@ -51,10 +52,10 @@ const WorkspaceContents = (count = 10, monitorId) => {
         const newActiveWs = Hyprland.active.workspace.id;
         if (newActiveWs > offset && newActiveWs <= offset + count) {
           self.setCss(`font-size: ${newActiveWs - offset}px;`);
+          self.attribute.lastImmediateActiveWs = self.attribute.immediateActiveWs;
+          self.attribute.immediateActiveWs = newActiveWs - offset;
+          self.attribute.updateMask(self);
         }
-        self.attribute.lastImmediateActiveWs = self.attribute.immediateActiveWs;
-        self.attribute.immediateActiveWs = newActiveWs;
-        self.attribute.updateMask(self);
       })
       .hook(Hyprland, (self) => self.attribute.updateMask(self), 'notify::workspaces')
       .on('draw', Lang.bind(area, (area, cr) => {
@@ -166,53 +167,4 @@ export default (monitorId) => EventBox({
       children: [WorkspaceContents(userOptions.workspaces.shown, monitorId)],
     })]
   }),
-  setup: (self) => {
-    self.add_events(Gdk.EventMask.POINTER_MOTION_MASK | Gdk.EventMask.BUTTON_PRESS_MASK | Gdk.EventMask.BUTTON_RELEASE_MASK);
-
-    // Handle button press event
-    self.on('button-press-event', (self, event) => {
-      const button = event.get_button()[1];
-      if (button === 1) { // Left click
-        self.attribute.clicked = true;
-
-        // Get mouse position and widget width
-        const [_, cursorX] = event.get_coords();
-        const widgetWidth = self.get_allocation().width;
-
-        // Calculate workspace ID
-        const wsId = Math.ceil(cursorX * userOptions.workspaces.shown / widgetWidth) + (monitorId * userOptions.workspaces.shown);
-
-        // Ensure the workspace ID is within the valid range
-        if (wsId >= 1 && wsId <= userOptions.workspaces.shown * (monitorId + 1)) {
-          Utils.execAsync([`${App.configDir}/scripts/hyprland/workspace_action.sh`, 'workspace', `${wsId}`])
-            .catch((err) => console.error(`Failed to switch to workspace ${wsId}:`, err));
-        }
-      } else if (button === 8) { // Middle click (button 8)
-        Hyprland.messageAsync(`dispatch togglespecialworkspace`).catch(print);
-      }
-    });
-
-    // Handle button release event
-    self.on('button-release-event', (self) => {
-      self.attribute.clicked = false;
-    });
-
-    // Optional: Handle motion event for drag-to-switch functionality
-    self.on('motion-notify-event', (self, event) => {
-      if (!self.attribute.clicked) return;
-
-      // Get mouse position and widget width
-      const [_, cursorX] = event.get_coords();
-      const widgetWidth = self.get_allocation().width;
-
-      // Calculate workspace ID
-      const wsId = Math.ceil(cursorX * userOptions.workspaces.shown / widgetWidth) + (monitorId * userOptions.workspaces.shown);
-
-      // Ensure the workspace ID is within the valid range
-      if (wsId >= 1 && wsId <= userOptions.workspaces.shown * (monitorId + 1)) {
-        Utils.execAsync([`${App.configDir}/scripts/hyprland/workspace_action.sh`, 'workspace', `${wsId}`])
-          .catch((err) => console.error(`Failed to switch to workspace ${wsId}:`, err));
-      }
-    });
-  },
 })
