@@ -22,7 +22,7 @@ function forMonitors(widget) {
 }
 function forMonitorsAsync(widget) {
   const n = Gdk.Display.get_default()?.get_n_monitors() || 1;
-  return range(n, 0).forEach((n) => widget(n).catch(print))
+  return range(n, 0).forEach((i) => widget(i, n).catch(print))
 }
 
 // Start stuff
@@ -62,6 +62,6 @@ App.config({
 });
 
 // Stuff that don't need to be toggled. And they're async so ugh...
-forMonitorsAsync((monitorId) => Bar(monitorId));
+forMonitorsAsync((monitorId, number_of_monitors) => Bar(monitorId, number_of_monitors));
 // Bar(0).catch(print); // Use this to debug the bar. Single monitor only.
 

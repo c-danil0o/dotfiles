@@ -39,7 +39,7 @@ const FocusOptionalWorkspaces = async (monitorId) => {
   }
 };
 
-export const Bar = async (monitor = 0) => {
+export const Bar = async (monitor = 0, number_of_monitors = 1) => {
   const SideModule = (children) => Widget.Box({
     className: 'bar-sidemodule',
     children: children,
@@ -106,7 +106,11 @@ export const Bar = async (monitor = 0) => {
         'nothing': nothingContent,
       },
       setup: (self) => self.hook(currentShellMode, (self) => {
-        self.shown = currentShellMode.value[monitor];
+        if (number_of_monitors === 1) {
+          self.shown = 'normal';
+        } else {
+          self.shown = currentShellMode.value[monitor];
+        }
       })
     }),
   });
