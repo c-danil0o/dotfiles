@@ -5,6 +5,7 @@
 
 let mapleader=" "
 let maplocalleader="\\"
+set clipboard+=unamedplus
 
 " Confirm to save changes before exiting modified buffer
 set formatoptions=jcroqlnt
@@ -24,7 +25,6 @@ set notimeout
 set undolevels=10000
 " Disable line wrap
 set nowrap
-set clipboard+=unnamedplus
 
 " Neovim settings that differ from Vim
 " https://neovim.io/doc/user/diff.html
@@ -42,8 +42,22 @@ set shortmess=filnxtToOF
 
 " gcc and gc<action> mappings.
 Plug 'tpope/vim-commentary'
-" s action, such as cs"' (replace " with '), ds" (unquote)
+
+" Emulate LazyVim mini.surround mappings
 Plug 'tpope/vim-surround'
+set g:surround_no_mappings = 1
+nmap gsa <Plug>YSurround
+xmap gsa <Plug>VSurround
+nmap gsr <Plug>CSurround
+nmap gsd <Plug>DSurround
+
+" Use s to jump anywhere (similar to flash.nvim in LazyVim)
+set easymotion
+set g:EasyMotion_do_mapping = 0
+nmap s <Plug>(easymotion-s)
+xmap s <Plug>(easymotion-s)
+omap s <Plug>(easymotion-s)
+
 " Enable the whichkey plugin, available on Jetbrains marketplace
 set which-key
 " Extended matching.  A Neovim default plugin.
@@ -247,13 +261,13 @@ nmap <leader>cr <Action>(RenameElement)
 " Source Action
 nmap <leader>cA <Action>(ShowIntentionActions)
 " Next Reference
-nmap ]] <Action>(GotoNextError)
+nmap ]] <Action>(GotoNextElementUnderCaretUsage)
 " Prev Reference
-nmap [[ <Action>(GotoPreviousError)
+nmap [[ <Action>(GotoPrevElementUnderCaretUsage)
 " Next Reference (alternative)
-nmap <a-n> <Action>(GotoNextError)
+nmap <a-n> <Action>(GotoNextElementUnderCaretUsage)
 " Prev Reference (alternative)
-nmap <a-p> <Action>(GotoPreviousError)
+nmap <a-p> <Action>(GotoPrevElementUnderCaretUsage)
 
 " Bufferline
 
@@ -357,13 +371,13 @@ nmap <leader>ss <Action>(GotoSymbol)
 " Goto Symbol (Workspace)
 nmap <leader>sS <Action>(GotoSymbol)
 " Word (Root Dir)
-nmap <leader>sw <Action>(FindWordAtCaret)
+nmap <leader>sw mzviw<Action>(FindInPath)<esc>`z
 " Word (cwd)
-nmap <leader>sW <Action>(FindWordAtCaret)
+nmap <leader>sW mzviw<Action>(FindInPath)<esc>`z
 " Selection (Root Dir)
-vmap <leader>sw <Action>(FindWordAtCaret)
+vmap <leader>sw <Action>(FindInPath)
 " Selection (cwd)
-vmap <leader>sW <Action>(FindWordAtCaret)
+vmap <leader>sW <Action>(FindInPath)
 " Colorscheme with Preview
 nmap <leader>uC <Action>(QuickChangeScheme)
 
@@ -461,8 +475,6 @@ inoremap <C-U> <C-G>u<C-U>
 inoremap <C-W> <C-G>u<C-W>
 " Q isn't exactly the same.
 nnoremap Q @@
-" There are several more Neovim mappings that need to be ported.
-
 
 nnoremap d "_d
 xnoremap d "_d

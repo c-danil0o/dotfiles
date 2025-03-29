@@ -3,7 +3,7 @@ add_newline = false
 
 format = """
 $username\
-[ • ](fg:cyan)\
+[ • ](fg:blue)\
 $directory
 $character"""
 
@@ -62,9 +62,9 @@ disabled = true
 style = "bg:color_orange fg:color_fg0"
 
 [username]
-style_user = "bold bg:cyan fg:black"
+style_user = "bold bg:blue fg:black"
 style_root = "red bold"
-format = "[](bold fg:cyan)[$user]($style)"
+format = "[](bold fg:blue)[$user]($style)"
 disabled = false
 show_always = true
 
