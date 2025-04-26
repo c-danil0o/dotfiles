@@ -5,8 +5,7 @@
 
 let mapleader=" "
 let maplocalleader="\\"
-set clipboard+=unamedplus
-
+set clipboard+=unnamedplus
 " Confirm to save changes before exiting modified buffer
 set formatoptions=jcroqlnt
 " Print line number

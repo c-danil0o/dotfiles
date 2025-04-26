@@ -7,12 +7,13 @@ Config(
   ignore_exclusive_zones: false,
   layer: Overlay,
   hide_plugin_info: true,
-  close_on_click: true,
+  close_on_click: false,
   show_results_immediately: false,
   max_entries: None,
   plugins: [
     "libapplications.so",
     "libshell.so",
     "libtranslate.so",
+    "libwebsearch.so",
   ],
 )
