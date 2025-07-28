@@ -1,6 +1,7 @@
 return {
 
   { "rebelot/kanagawa.nvim" },
+  { "datsfilipe/vesper.nvim" },
   {
     "catppuccin/nvim",
     name = "catppuccin",
@@ -8,24 +9,11 @@ return {
     opts = {
       term_colors = true,
       transparent_background = false,
-      styles = {
-        comments = {},
-        conditionals = {},
-        loops = {},
-        functions = {},
-        keywords = {},
-        strings = {},
-        variables = {},
-        numbers = {},
-        booleans = {},
-        properties = {},
-        types = {},
-      },
       color_overrides = {
         mocha = {
-          base = "#0f111a",
           mantle = "#0f111a",
-          crust = "#0f111a",
+          base = "#0e1017",
+          crust = "#11131c",
         },
       },
       integrations = {

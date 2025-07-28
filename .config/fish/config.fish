@@ -37,7 +37,6 @@ alias monitor-r-on='hyprctl dispatch dpms off DP-8'
 
 alias pff='poweroff'
 
-
 # function fish_prompt
 #   set_color cyan; echo (pwd)
 #   set_color green; echo '> '
@@ -46,3 +45,4 @@ set -Ux EDITOR nvim
 set -Ux VISUAL nvim
 zoxide init fish | source
 set PATH $PATH ~/.cargo/bin
+set -x PATH $PATH (go env GOPATH)/bin
